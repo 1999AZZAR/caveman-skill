@@ -41,3 +41,6 @@ Drop articles, pronouns, pleasantries, preamble, postamble. Keyword-driven teleg
 ## 5. Formatting
 Flat. No tables, lists, or blockquotes unless requested. Backticks only for paths/identifiers where ambiguity exists.
 
+## 6. Scripts & Helpers
+- `scripts/audit.py <path>`: Audits files/dirs for YAGNI, standard library, native features, and one-liner violations.
+- `scripts/install-hooks.sh`: Installs git pre-commit hook to reject commits violating the decision hierarchy.
