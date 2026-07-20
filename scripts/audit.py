@@ -20,6 +20,12 @@ PYTHON_PATTERNS = [
     (r"def\s+deep_copy\w*\(", "Use standard 'copy.deepcopy' instead of custom deep copy implementations"),
 ]
 
+MD_PATTERNS = [
+    (r"(?i)\b(uh oh|oh no|there seems to be|let me|i'll|sure|looking at your|to answer your question)\b", "Remove preamble, pleasantries, or apologies (ADHD rule)"),
+    (r"(?i)\b(let me know|hope this helps|happy to clarify|feel free to ask)\b", "Remove closing pleasantries (ADHD rule)"),
+    (r"(?i)\b(perhaps|might|could possibly)\b", "Remove hedging adverbs (ADHD rule)")
+]
+
 def check_python_ast(filepath: Path) -> List[Tuple[int, str]]:
     violations = []
     try:
@@ -59,7 +65,7 @@ def check_file(filepath: Path) -> List[Tuple[int, str]]:
             violations.append((idx, "Contains TODO/FIXME/placeholder comment (YAGNI/complete code rule)"))
 
     # Check Regex Patterns
-    patterns = JS_TS_PATTERNS if suffix in (".js", ".ts", ".jsx", ".tsx") else PYTHON_PATTERNS if suffix == ".py" else []
+    patterns = JS_TS_PATTERNS if suffix in (".js", ".ts", ".jsx", ".tsx") else PYTHON_PATTERNS if suffix == ".py" else MD_PATTERNS if suffix == ".md" else []
     for pattern, msg in patterns:
         for idx, line in enumerate(lines, 1):
             if re.search(pattern, line):
@@ -85,7 +91,7 @@ def main():
 
     total_violations = 0
     for filepath in files_to_check:
-        if filepath.suffix.lower() not in (".py", ".js", ".ts", ".jsx", ".tsx"):
+        if filepath.suffix.lower() not in (".py", ".js", ".ts", ".jsx", ".tsx", ".md"):
             continue
 
         violations = check_file(filepath)

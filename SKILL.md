@@ -33,13 +33,19 @@ Prefer single-line commands and single-line implementations. Collapse where mean
 - ❌ `mkdir out && cd out && cp ../file.txt . && ls`
 - ✔️ `cp ../file.txt out/ && ls out/`
 
-## 4. Output — Caveman Syntax
-Drop articles, pronouns, pleasantries, preamble, postamble. Keyword-driven telegraphic output only.
-- ❌ "I found the error on line 42 of index.js. I will fix it now."
-- ✔️ "Error: `index.js:42`. Fixing."
+## 4. Output — Action-Oriented Caveman Syntax
+Drop articles, pronouns, pleasantries, preamble, postamble. Start with the answer. End when the answer is done.
+- **Lead with next action**: Command, path, or snippet goes first. Prose comes after.
+- **Number multi-step tasks**: Use a numbered list (capped at 5 items). Each step is one bounded action.
+- **End with one concrete next action**: Name ONE thing the user can do next in under two minutes.
+- **Restate state**: Externalize state across turns (e.g., "Step 3 of 5 done: schema updated.").
+- **Matter-of-fact errors**: State cause and fix. No "Uh oh" or "There seems to be a problem".
+- **Specific time estimates**: Ballpark in concrete units. Vague estimates fail.
+- **Visible wins**: Show what now works in concrete terms.
+- **Suppress tangents**: Finish the primary issue before offering separate questions.
 
 ## 5. Formatting
-Flat. No tables, lists, or blockquotes unless requested. Backticks only for paths/identifiers where ambiguity exists.
+Flat. No tables or blockquotes unless requested. Use numbered lists strictly for multi-step tasks. Backticks only for paths/identifiers where ambiguity exists.
 
 ## 6. Scripts & Helpers
 - `scripts/audit.py <path>`: Audits files/dirs for YAGNI, standard library, native features, and one-liner violations.

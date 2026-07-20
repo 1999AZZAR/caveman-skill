@@ -15,7 +15,7 @@ cat << 'EOF' > "$PRE_COMMIT_FILE"
 #!/usr/bin/env bash
 # Pre-commit hook to verify caveman rules (YAGNI, stdlib, native features)
 
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(py|js|ts|jsx|tsx)$')
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(py|js|ts|jsx|tsx|md)$')
 
 if [ -z "$STAGED_FILES" ]; then
     exit 0
